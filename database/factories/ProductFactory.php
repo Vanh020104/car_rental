@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             "qty"=>random_int(2,50),
             "category_id"=>random_int(1,10),
             "seat"=>random_int(4,6),
-            "door"=>random_int(4,7),
+            "door"=>value(4),
             "fuel_style"=>value("Hybird"),
             "car_year"=>random_int(2010,2023),
             "mileage"=>random_int(200,1000),

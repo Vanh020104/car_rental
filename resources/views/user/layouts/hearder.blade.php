@@ -11,11 +11,11 @@
 
             <div class="topbar-right">
                 <div class="social-icons">
-                    <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                    <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                    <a href="#"><i class="fa fa-youtube fa-lg"></i></a>
-                    <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                    <a href="#"><i class="fa fa-instagram fa-lg"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -61,7 +61,11 @@
                                     @endforeach
                                 </ul>
                             </li>
-                            <li><a class="menu-item" href="booking.html">Booking</a></li>
+                            <li><a class="menu-item" href="{{url("cart")}}">Cart
+                                    <span style="margin-left: 40px; position: relative; bottom: 27px">
+                                    {{session()->has("cart")?count(session("cart")):0}}
+                                    </span>
+                                    </a></li>
                             <li><a class="menu-item" href="account-dashboard.html">My Account</a>
                                 <ul>
                                     <li><a class="menu-item" href="account-dashboard.html">Dashboard</a></li>

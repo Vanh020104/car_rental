@@ -3,15 +3,20 @@
 
 <head>
     <title>Home-exam_php</title>
-
+    <meta charset="UTF-8">
+    <base href="/">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Rentaly - Multipurpose Vehicle Car Rental Website Template" name="description">
     <meta content="" name="keywords">
     <meta content="" name="author">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSS Files
     ================================================== -->
+
+    @yield("before_css")
     @include("user.layouts.head")
+    @yield("after_css")
 </head>
 
 <body onload="initialize()">
@@ -451,52 +456,7 @@
                 </div>
             </div>
         </section>
-
-        <section id="section-cars">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 offset-lg-3 text-center">
-                        <h2>New Vehicles</h2>
-                        <p>Driving your dreams to reality with an exquisite fleet of versatile vehicles for unforgettable journeys.</p>
-                        <div class="spacer-20"></div>
-                    </div>
-
-                    <div id="items-carousel" class="owl-carousel wow fadeIn">
-                        @foreach($products as $item)
-                            <div class="col-lg-12">
-
-                                <div class="de-item mb30">
-                                    <div class="d-img">
-                                        <img src="{{$item->thumbnail}}" class="img-fluid" alt="">
-                                    </div>
-
-                                    <div class="d-info">
-                                        <div class="d-text">
-                                            <h4><a href="{{url("detail",["product"=>$item->slug])}}">{{$item->name}}</a></h4>
-                                            <div class="d-item_like">
-                                                <i class="fa fa-heart"></i><span>74</span>
-                                            </div>
-                                            <div class="d-atr-group">
-                                                <span class="d-atr"><img src="images/icons/1.svg" alt="">{{$item->seat}}</span>
-                                                <span class="d-atr"><img src="images/icons/2.svg" alt="">2</span>
-                                                <span class="d-atr"><img src="images/icons/3.svg" alt="">4</span>
-                                                <span class="d-atr"><img src="images/icons/4.svg" alt="">{{$item->fuel_style}}</span>
-                                            </div>
-                                            <div class="d-price">
-                                                Daily rate from <span>{{$item->price}}</span>
-                                                <a class="btn-main" href="{{url("product")}}">Rent Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        @endforeach
-                    </div>
-
-                </div>
-            </div>
-        </section>
+    @include("user.pages.category")
 
         <section class="text-light jarallax" aria-label="section">
             <img src="images/background/3.jpg" alt="" class="jarallax-img">
@@ -737,19 +697,12 @@
     @include("user.layouts.footer")
     <!-- footer close -->
 </div>
-<div id="selector">
-    <div id="demo-rtl" class="sc-opt">
-        <div class="sc-icon">RTL</div><span class="sc-val">Click to Enable</span>
-    </div>
-</div>
-<div id="purchase-now">
 
-    <div class="pn-hover">Buy Now</div>
-</div>
 <!-- Javascript Files
 ================================================== -->
+@yield("before_js")
 @include("user.layouts.scripts")
-
+@yield("after_js")
 </body>
-
 </html>
+

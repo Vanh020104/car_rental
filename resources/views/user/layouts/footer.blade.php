@@ -12,7 +12,7 @@
                 <div class="widget">
                     <h5>Contact Info</h5>
                     <address class="s1">
-                        <span><i class="fa-solid fa-location-dot"></i>08 W 36th St, New York, NY 10001</span>
+                        <span><i class="fa-solid fa-location-dot"></i>8A Ton That Thuyet, My Dinh2, Nam Tu Liem, Ha Noi.</span>
                         <span><i class="id-color fa fa-phone fa-lg"></i>+1 333 9296</span>
                         <span><i class="id-color fa fa-envelope-o fa-lg"></i><a href="mailto:contact@example.com">contact@example.com</a></span>
                         <span><i class="id-color fa fa-file-pdf-o fa-lg"></i><a href="#">Download Brochure</a></span>
@@ -41,11 +41,11 @@
                 <div class="widget">
                     <h5>Social Network</h5>
                     <div class="social-icons">
-                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-rss fa-lg"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-solid fa-house-signal"></i></a>
                     </div>
                 </div>
             </div>
