@@ -87,7 +87,7 @@
                                 <svg style="margin-bottom: 7px" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.08984 9.00008C9.32495 8.33175 9.789 7.76819 10.3998 7.40921C11.0106 7.05024 11.7287 6.91902 12.427 7.03879C13.1253 7.15857 13.7587 7.52161 14.2149 8.06361C14.6712 8.60561 14.9209 9.2916 14.9198 10.0001C14.9198 12.0001 11.9198 13.0001 11.9198 13.0001" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 17H12.01" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                             </span>
                             <div class="paper_passport">
-                                <span style="color: black">$1,000 (cash/transfer to vehicle owner upon receipt) or Motorcycle (with original driver's license) worth $1,000</span>
+                                <span style="color: black">${{$product->deposit}} (cash/transfer to vehicle owner upon receipt) or Motorcycle (with original driver's license) worth ${{$product->deposit}}</span>
                             </div>
                         </div>
 
@@ -197,154 +197,20 @@
                     </ul>
                     </form>
                 </div>
-
-
                 <div class="col-lg-3">
-                    <form  action="{{url("/add-to-cart",["product"=>$product->id])}}" method="get">
                     <div class="de-price text-center">
                         Price/Date
                         <h3>${{$product->price}}</h3>
                     </div>
                     <div class="spacer-30"></div>
                     <div class="de-box mb25">
-
-
-{{--                        </form>--}}
-                    <form name="contactForm" id='contact_form' method="post">
-
                             <h4 style="text-align: center">Booking this car</h4>
                             <div class="spacer-20"></div>
-                            <div class="row">
-
-
-                                <div class="col-lg-12 mb20">
-                                    <h5>Pick Up Date & Time</h5>
-                                    <div class="date-time-field">
-                                        <input type="date" name="start_date" id="start_date" required value="">
-                                        <select name="Pick Up Time" id="pickup-time">
-                                            <option selected disabled value="Select time">Time</option>
-                                            <option value="00:00">00:00</option>
-                                            <option value="00:30">00:30</option>
-                                            <option value="01:00">01:00</option>
-                                            <option value="01:30">01:30</option>
-                                            <option value="02:00">02:00</option>
-                                            <option value="02:30">02:30</option>
-                                            <option value="03:00">03:00</option>
-                                            <option value="03:30">03:30</option>
-                                            <option value="04:00">04:00</option>
-                                            <option value="04:30">04:30</option>
-                                            <option value="05:00">05:00</option>
-                                            <option value="05:30">05:30</option>
-                                            <option value="06:00">06:00</option>
-                                            <option value="06:30">06:30</option>
-                                            <option value="07:00">07:00</option>
-                                            <option value="07:30">07:30</option>
-                                            <option value="08:00">08:00</option>
-                                            <option value="08:30">08:30</option>
-                                            <option value="09:00">09:00</option>
-                                            <option value="09:30">09:30</option>
-                                            <option value="10:00">10:00</option>
-                                            <option value="10:30">10:30</option>
-                                            <option value="11:00">11:00</option>
-                                            <option value="11:30">11:30</option>
-                                            <option value="12:00">12:00</option>
-                                            <option value="12:30">12:30</option>
-                                            <option value="13:00">13:00</option>
-                                            <option value="13:30">13:30</option>
-                                            <option value="14:00">14:00</option>
-                                            <option value="14:30">14:30</option>
-                                            <option value="15:00">15:00</option>
-                                            <option value="15:30">15:30</option>
-                                            <option value="16:00">16:00</option>
-                                            <option value="16:30">16:30</option>
-                                            <option value="17:00">17:00</option>
-                                            <option value="17:30">17:30</option>
-                                            <option value="18:00">18:00</option>
-                                            <option value="18:30">18:30</option>
-                                            <option value="19:00">19:00</option>
-                                            <option value="19:30">19:30</option>
-                                            <option value="20:00">20:00</option>
-                                            <option value="20:30">20:30</option>
-                                            <option value="21:00">21:00</option>
-                                            <option value="21:30">21:30</option>
-                                            <option value="22:00">22:00</option>
-                                            <option value="22:30">22:30</option>
-                                            <option value="23:00">23:00</option>
-                                            <option value="23:30">23:30</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 mb20">
-                                    <h5>Return Date & Time</h5>
-                                    <div class="date-time-field">
-                                        <input type="date" name="end_date" id="end_date" required value="">
-                                        <select name="Collection Time" id="collection-time">
-                                            <option selected disabled value="Select time">Time</option>
-                                            <option value="00:00">00:00</option>
-                                            <option value="00:30">00:30</option>
-                                            <option value="01:00">01:00</option>
-                                            <option value="01:30">01:30</option>
-                                            <option value="02:00">02:00</option>
-                                            <option value="02:30">02:30</option>
-                                            <option value="03:00">03:00</option>
-                                            <option value="03:30">03:30</option>
-                                            <option value="04:00">04:00</option>
-                                            <option value="04:30">04:30</option>
-                                            <option value="05:00">05:00</option>
-                                            <option value="05:30">05:30</option>
-                                            <option value="06:00">06:00</option>
-                                            <option value="06:30">06:30</option>
-                                            <option value="07:00">07:00</option>
-                                            <option value="07:30">07:30</option>
-                                            <option value="08:00">08:00</option>
-                                            <option value="08:30">08:30</option>
-                                            <option value="09:00">09:00</option>
-                                            <option value="09:30">09:30</option>
-                                            <option value="10:00">10:00</option>
-                                            <option value="10:30">10:30</option>
-                                            <option value="11:00">11:00</option>
-                                            <option value="11:30">11:30</option>
-                                            <option value="12:00">12:00</option>
-                                            <option value="12:30">12:30</option>
-                                            <option value="13:00">13:00</option>
-                                            <option value="13:30">13:30</option>
-                                            <option value="14:00">14:00</option>
-                                            <option value="14:30">14:30</option>
-                                            <option value="15:00">15:00</option>
-                                            <option value="15:30">15:30</option>
-                                            <option value="16:00">16:00</option>
-                                            <option value="16:30">16:30</option>
-                                            <option value="17:00">17:00</option>
-                                            <option value="17:30">17:30</option>
-                                            <option value="18:00">18:00</option>
-                                            <option value="18:30">18:30</option>
-                                            <option value="19:00">19:00</option>
-                                            <option value="19:30">19:30</option>
-                                            <option value="20:00">20:00</option>
-                                            <option value="20:30">20:30</option>
-                                            <option value="21:00">21:00</option>
-                                            <option value="21:30">21:30</option>
-                                            <option value="22:00">22:00</option>
-                                            <option value="22:30">22:30</option>
-                                            <option value="23:00">23:00</option>
-                                            <option value="23:30">23:30</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <form action="{{url("/add-to-cart",["product"=>$product->id])}}" method="get">
-                                <a href="{{url("calculate")}}" style="margin-bottom: 20px" class="btn-main btn-fullwidth">Rent Now</a>
-{{--                            <a href="{{url("cart")}}"  class="btn-main btn-fullwidth">Add To Cart</a>--}}
-                                <button type="submit" class="btn-main btn-fullwidth">ADD TO CART</button>
-                            </form>
-
+                        <a href="{{url("/checkout",["product"=>$product->name])}}" type="submit" style="margin-bottom: 20px" class="btn-main btn-fullwidth">Rent Now</a>
+                        <form action="{{url("/add-to-cart",["product"=>$product->id])}}" method="get">
+                            <button type="submit" class="btn-main btn-fullwidth">ADD TO CART</button>
                         </form>
-
                             <div class="clearfix"></div>
-
                     </div>
                     <div class="de-box">
                         <h4>Share</h4>
@@ -359,13 +225,9 @@
                             <span><i class="fa-solid fa-envelope"></i></span>
                         </div>
                     </div>
-                    </form>
                 </div>
-
-
             </div>
         </div>
-
     </section>
 
 
@@ -579,19 +441,3 @@
 </style>
 </html>
 
-
-<form method="POST" action="{{ route('save-dates') }}">
-    @csrf
-
-    <div>
-        <label for="start_datetime">Ngày và giờ bắt đầu:</label>
-        <input type="datetime-local" id="start_datetime" name="start_datetime">
-    </div>
-
-    <div>
-        <label for="end_datetime">Ngày và giờ kết thúc:</label>
-        <input type="datetime-local" id="end_datetime" name="end_datetime">
-    </div>
-
-    <button type="submit">Lưu</button>
-</form>

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
+
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class HomeController extends Controller
 {
@@ -18,23 +22,14 @@ class HomeController extends Controller
         return view("user.pages.home",compact("products"));
     }
 
-    public function product(Product $product,Request $request){
+    public function product(Product $product){
 
 
-        // Truyền số ngày vào view
+
         return view("user.pages.product", compact("product"));
     }
 
     public function category(Category $category){
-        // dựa vào id tìm category
-        // nếu ko tồn tại -> 404
-//        $category = Category::find($id);
-//        if($category == null){
-//            return abort(404);
-//        }
-
-//        $category = Category::findOrFail($id);
-
         $products = Product::where("category_id",$category->id)
             ->orderBy("created_at","desc")->paginate(14);
         return view("user.pages.category",compact("products"));
@@ -55,7 +50,7 @@ class HomeController extends Controller
         session(["cart"=>$cart]);
         return redirect()->back()->with("success","Your vehicle has just been added to the cart!");
     }
-    public function cart(Request $request){
+    public function cart(){
         $cart = session()->has("cart")?session("cart"):[];
         $subtotal = 0;
         $can_checkout = true;
@@ -67,7 +62,6 @@ class HomeController extends Controller
 
 
         $total = $subtotal*1.1; // vat: 10%
-
         return view("user.pages.cart",compact("cart","subtotal","total","can_checkout"));
     }
 
@@ -86,5 +80,72 @@ class HomeController extends Controller
         return redirect()->back()->with("success", "All products have been removed from the cart!");
     }
 
+
+    public function checkoutSlug($slug)
+    {
+        // Lấy thông tin sản phẩm từ slug
+        $product = Product::where('slug', $slug)->first();
+
+        // Kiểm tra xem sản phẩm có tồn tại hay không
+        if (!$product) {
+            abort(404);
+        }
+
+        // Chuyển hướng sang trang thanh toán và truyền thông tin sản phẩm
+        return view('user.pages.checkout', ['product' => $product]);
+    }
+
+
+    public function checkoutForm()
+    {
+        return view('user.pages.cart');
+    }
+
+    public function processCheckout(Request $request, Order $order)
+    {
+        $validatedData = $request->validate([
+            'full_name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'location' => 'required',
+            'tel' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+
+        $startDate = Carbon::parse($validatedData['start_date']);
+        $endDate = Carbon::parse($validatedData['end_date']);
+
+        if ($endDate->lessThan($startDate)) {
+            // Ngày kết thúc sau ngày bắt đầu
+            $errorMessage = 'Ngày kết thúc phải sau ngày bắt đầu. Vui lòng chọn lại.';
+            return redirect()->back()->with("success",compact("errorMessage"));
+        }
+
+        $numOfDays = $startDate->diffInDays($endDate) +1;
+
+        $order = new Order;
+        $order->full_name = $validatedData['full_name'];
+        $order->email = $validatedData['email'];
+        $order->address = $validatedData['address'];
+        $order->location = $validatedData['location'];
+        $order->tel = $validatedData['tel'];
+        $order->start_date = $startDate;
+        $order->end_date = $endDate;
+        $order->start_time = $validatedData['start_time'];
+        $order->end_time = $validatedData['end_time'];
+        $order->num_of_days = $numOfDays;
+        $order->save();
+        // Redirect or do something else
+        $cart = session()->has("cart")?session("cart"):[];
+        $subtotal = 0;
+        foreach ($cart as $item){
+            $subtotal += $item->price * $item->buy_qty;
+        }
+        $total = $subtotal*1.1; // vat: 10%
+        return view("user.pages.bill",compact("subtotal","total","order"));
+    }
 
 }

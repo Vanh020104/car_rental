@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DateController;
 
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +20,8 @@ Route::get('/add-to-cart/{product}', [\App\Http\Controllers\HomeController::clas
 Route::get('/cart', [\App\Http\Controllers\HomeController::class,"cart"]);
 Route::get('/delete-from-cart/{product}', [\App\Http\Controllers\HomeController::class, "deleteFromCart"]);
 Route::get('/clear-cart', [\App\Http\Controllers\HomeController::class, "clearCart"]);
-Route::post('/save-dates', [DateController::class, 'saveDates'])->name('save-dates'); // tinh so ngay va lu db
+Route::get('/checkout/{slug}', [\App\Http\Controllers\HomeController::class, "checkoutSlug"])->name('checkoutSlug');
+Route::post('/bill/{product}', [\App\Http\Controllers\HomeController::class, 'billCart']);
+Route::post('/checkout', [\App\Http\Controllers\HomeController::class, 'processCheckout'])->name('checkout.process');
+Route::get('/checkout/{order}', [\App\Http\Controllers\HomeController::class, 'checkoutForm'])->name('checkout.form');
 

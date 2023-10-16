@@ -15,6 +15,7 @@
     @include("user.layouts.head")
     @yield("after_css")
 
+
 </head>
 
 
@@ -22,7 +23,6 @@
 @include("user.layouts.hearder")
 <div class="no-bottom no-top zebra" id="content">
     <div id="top"></div>
-
     <!-- section begin -->
     <section id="subheader" class="jarallax text-light">
         <img src="images/background/2.jpg" class="jarallax-img" alt="">
@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h1>Cart</h1>
+                        <h1>Car Rent</h1>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -39,78 +39,104 @@
     </section>
     <!-- section close -->
 
+<div class="container" style="margin-top: 80px;margin-bottom: 80px">
+
     <div class="container">
-        @if(count($cart)==0)
-            <p class="alert alert-success" style="text-align: center; margin: 80px 0">There are no cars in the cart!</p>
-        @else
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__table" style="margin-top: 50px; font-family: Outfit; font-weight: 300; font-size: 16px">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th class="shoping__product">Cars List</th>
-                                <th>Name</th>
-                                <th>Price/date</th>
-                                <th>Deposit</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($cart as $item)
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="{{$item->thumbnail}}" width="100" alt="">
+        <div class="checkout__form">
+            <h4 style="text-align: center; margin-bottom: 30px">Billing Details</h4>
+{{--            <form method="POST" action="{{ route('checkoutTwo') }}">--}}
+{{--                @csrf--}}
+            <form action="{{ route('checkout.process') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="checkout__input">
+                            <p>Full Name<span>*</span></p>
+                            <input name="full_name" id="full_name" type="text" value="{{old("full_name")}}">
+                            @error("full_name")
+                            <p class="text-danger"><i>{{$message}}</i></p>
+                            @enderror
+                        </div>
+                        <div class="checkout__input">
+                            <p>Address<span>*</span></p>
+                            <input name="address" id="address" value="{{old("address")}}" type="text" placeholder="Street Address" class="checkout__input__add">
+                            @error("address")
+                            <p class="text-danger"><i>{{$message}}</i></p>
+                            @enderror
+                        </div>
+                        <div class="checkout__input">
+                            <p>Vehicle pickup location<span>*</span></p>
+                            <input name="location" id="location" value="{{old("location")}}" type="text" placeholder="Street Address" class="checkout__input__add">
+                            @error("location")
+                            <p class="text-danger"><i>{{$message}}</i></p>
+                            @enderror
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Telephone<span>*</span></p>
+                                    <input value="{{old("tel")}}" name="tel" id="tel" type="tel">
+                                    @error("tel")
+                                    <p class="text-danger"><i>{{$message}}</i></p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email<span>*</span></p>
+                                    <input value="" name="email" id="email" type="email">
+                                    @error("email")
+                                    <p class="text-danger"><i>{{$message}}</i></p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+{{--                    <form method="POST" action="{{ route('store') }}">--}}
+{{--                            @csrf--}}
+                            <div class="checkout__input">
+                                <p>Pick Up Date & Time<span>*</span></p>
+                                <div class="date-time-field" style="display: flex" >
+                                    <input type="date" id="start_date" name="start_date" required style="padding: 0 20px">
+                                    <input type="time" id="start_time" name="start_time" required style="padding: 0 20px; margin-left: 25px">
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Return Date & Time<span>*</span></p>
+                                <div class="date-time-field" style="display: flex" >
+                                    <input type="date" id="end_date" name="end_date" required style="padding: 0 20px">
+                                    <input type="time" id="end_time" name="end_time" required style="padding: 0 20px; margin-left: 25px">
+                                </div>
+                            </div>
+                        @if(isset($errorMessage))
+                            <div class="alert alert-danger">
+                                {{ $errorMessage }}
+                            </div>
+                        @endif
 
-                                    </td>
-                                    <td>
-                                        <h5>{{$item->name}}</h5>
-                                    </td>
-                                    <td>
-                                        <h5> ${{$item->price}}</h5>
 
-                                    </td>
-                                    <td>
-                                        <h5>${{$item->deposit}}</h5>
-                                    </td>
+                    </div>
 
-                                    <td>
-                                        <a  href="{{url("checkout",["product"=>$item->slug])}}" class="btn-main btn-fullwidth" style="width: 200px">Rent Now</a>
-{{--                                        <a href="{{ route('checkout', ['slug' => $product->slug]) }}">Thanh toán</a>--}}
-                                    </td>
-
-
-                                    <td class="shoping__cart__item__close">
-                                        <a href="/delete-from-cart/{{ $item->id }}"><span class="icon_close"></span></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                            </tbody>
-                        </table>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4 style="text-align: center">Your Order</h4>
+                            <div class="checkout__order__products">Car Name<span style="font-weight: 300">{{ $product->name }}</span></div>
+                            <div class="checkout__order__subtotal">Price/date <span style="font-weight: 300">${{$product->price}}</span></div>
+                            <div class="checkout__order__subtotal">Deposit <span style="font-weight: 300">${{$product->deposit}}</span></div>
+                             <button type="submit" class="btn-main btn-fullwidth">Rent Now</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12" style="margin-bottom: 50px">
-                    <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn" style="background-color: #1ecb15; color: white; border-radius: 5px">CONTINUE TO RENT</a>
-                        <a href="/clear-cart" class="primary-btn cart-btn cart-btn-right "><span class="icon_loading"></span>
-                            Clear Cart</a>
-                    </div>
-                </div>
-
-            </div>
-        @endif
+            </form>
+        </div>
     </div>
+</div>
 @include("user.layouts.footer")
 @yield("before_js")
 @include("user.layouts.scripts")
 @yield("after_js")
 </body>
 <style>
-    {{--    css cho phần continue shoping--}}
+        /*css cho phần continue shoping*/
 
 /******************************************************************
   Template Name: Ogani
@@ -3582,4 +3608,6 @@
         }
     }
 </style>
+
 </html>
+

@@ -13,6 +13,7 @@ class Product extends Model
         "name",
         "slug",
         "price",
+        "deposit",
         "thumbnail",
         "description",
         "qty",

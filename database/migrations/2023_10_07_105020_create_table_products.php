@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("slug")->unique();
             $table->unsignedDecimal("price");
+            $table->unsignedDecimal("deposit"); // tiên cọc
             $table->integer("seat");
             $table->integer("door");
             $table->string("fuel_style");
