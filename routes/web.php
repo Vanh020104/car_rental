@@ -25,3 +25,8 @@ Route::post('/bill/{product}', [\App\Http\Controllers\HomeController::class, 'bi
 Route::post('/checkout', [\App\Http\Controllers\HomeController::class, 'processCheckout'])->name('checkout.process');
 Route::get('/checkout/{order}', [\App\Http\Controllers\HomeController::class, 'checkoutForm'])->name('checkout.form');
 
+
+//pay
+Route::post('/checkout', [\App\Http\Controllers\HomeController::class,"placeOrder"]);
+Route::get('/paypal-success/{order}', [\App\Http\Controllers\HomeController::class,"paypalSuccess"]);
+Route::get('/paypal-cancel/{order}', [\App\Http\Controllers\HomeController::class,"paypalCancel"]);

@@ -145,7 +145,13 @@ class HomeController extends Controller
             $subtotal += $item->price * $item->buy_qty;
         }
         $total = $subtotal*1.1; // vat: 10%
+
+
+
         return view("user.pages.bill",compact("subtotal","total","order"));
+    }
+    public function placeOrder(){
+
     }
 
 }
