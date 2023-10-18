@@ -17,7 +17,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->unique()->colorName;
+        $name = $this->faker->name;
         return [
             "name" =>$name,
             "slug" => Str::slug($name),

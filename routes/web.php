@@ -34,3 +34,6 @@ Route::get('/paypal-cancel/{order}', [\App\Http\Controllers\HomeController::clas
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(["auth","is_admin"])->prefix("admin")->group(function () {
+    include_once "admin.php";
+});

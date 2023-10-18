@@ -1,35 +1,5 @@
-<!DOCTYPE html>
-<html lang="zxx">
-
-<head>
-    <title>Home-exam_php</title>
-    <meta charset="UTF-8">
-    <base href="/">
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Rentaly - Multipurpose Vehicle Car Rental Website Template" name="description">
-    <meta content="" name="keywords">
-    <meta content="" name="author">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- CSS Files
-    ================================================== -->
-
-    @yield("before_css")
-    @include("user.layouts.head")
-    @yield("after_css")
-</head>
-
-<body onload="initialize()">
-<div id="wrapper">
-
-    <!-- page preloader begin -->
-    <div id="de-preloader"></div>
-    <!-- page preloader close -->
-
-    <!-- header begin -->
-    @include("user.layouts.hearder")
-    <!-- header close -->
-    <!-- content begin -->
+@extends("user.layouts.app")
+@section("content")
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
         <section id="section-hero" aria-label="section" class="jarallax">
@@ -456,7 +426,7 @@
                 </div>
             </div>
         </section>
-    @include("user.pages.category")
+        @include("user.pages.category")
 
         <section class="text-light jarallax" aria-label="section">
             <img src="images/background/3.jpg" alt="" class="jarallax-img">
@@ -693,16 +663,4 @@
     </div>
     <!-- content close -->
     <a href="#" id="back-to-top"></a>
-    <!-- footer begin -->
-    @include("user.layouts.footer")
-    <!-- footer close -->
-</div>
-
-<!-- Javascript Files
-================================================== -->
-@yield("before_js")
-@include("user.layouts.scripts")
-@yield("after_js")
-</body>
-</html>
-
+@endsection

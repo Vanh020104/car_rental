@@ -25,4 +25,7 @@ class Order extends Model
         'end_time',
         'num_of_days',
     ];
+    public function Products(){
+        return $this->belongsToMany(Product::class,"order_products")->withPivot(["qty","price"]);
+    }
 }
