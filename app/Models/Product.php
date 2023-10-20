@@ -25,4 +25,9 @@ class Product extends Model
         "mileage",
         "color"
     ];
+
+    public function Category(){ // model relationship
+        return $this->belongsTo(Category::class);
+    }
+
 }
